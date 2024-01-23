@@ -3,6 +3,7 @@ package backend.vm;
 import backend.common.AbstractCache;
 import backend.dm.DataManager;
 import backend.tm.TransactionManager;
+import backend.tm.TransactionManagerImpl;
 import backend.utils.Panic;
 import common.Error;
 
@@ -28,6 +29,7 @@ public class VersionManagerImpl extends AbstractCache<Entry>
 		this.tm = tm;
 		this.dm = dm;
 		activeTransaction = new HashMap<>();
+		activeTransaction.put(TransactionManagerImpl.SUPER_XID, Transaction.newTransaction(TransactionManagerImpl.SUPER_XID, 0, null));
 		lock = new ReentrantLock();
 		lockTable = new LockTable();
 	}

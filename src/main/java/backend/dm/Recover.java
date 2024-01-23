@@ -164,7 +164,7 @@ public class Recover {
 		byte[] pageNo = Parser.int2Byte(page.getPageNumber());
 		byte[] offset = Parser.short2Byte(PageX.getFSO(page));
 		
-		return Bytes.concat(logType, xidRaw, pageNo, offset);
+		return Bytes.concat(logType, xidRaw, pageNo, offset, raw);
 	}
 	
 	private static InsertLogInfo parseInsertLog(byte[] log) {
@@ -239,6 +239,7 @@ public class Recover {
 		
 		Page page = null;
 		try {
+			//TODO:解决pageNo为0的bug
 			page = pc.getPage(pageNo);
 		} catch (Exception e) {
 			Panic.panic(e);

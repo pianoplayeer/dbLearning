@@ -40,12 +40,12 @@ public class Parser {
 			String next = tokenizer.peek();
 			if (!"".equals(next)) {
 				byte[] errStat = tokenizer.errStat();
-				statErr = new RuntimeException("Invalid statement: " + Arrays.toString(errStat));
+				statErr = new RuntimeException("Invalid statement: " + new String(errStat));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			byte[] errStat = tokenizer.errStat();
-			statErr = new RuntimeException("Invalid statement: " + Arrays.toString(errStat));
+			statErr = new RuntimeException("Invalid statement: " + new String(errStat));
 		}
 		
 		if (statErr != null) {
@@ -73,6 +73,11 @@ public class Parser {
 		tokenizer.pop();
 		
 		update.fieldName = tokenizer.peek();
+		tokenizer.pop();
+		
+		if(!"=".equals(tokenizer.peek())) {
+			throw Error.InvalidCommandException;
+		}
 		tokenizer.pop();
 		
 		update.value = tokenizer.peek();

@@ -38,7 +38,7 @@ public class Parser {
 	
 	public static ParseStringRes parseString(byte[] raw) {
 		int len = parseInt(Arrays.copyOf(raw, 4));
-		String str = Arrays.toString(Arrays.copyOfRange(raw, 4, 4 + len));
+		String str = new String(Arrays.copyOfRange(raw, 4, 4 + len));
 		return new ParseStringRes(str, 4 + len);
 	}
 	

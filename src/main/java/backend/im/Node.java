@@ -88,7 +88,7 @@ public class Node {
 		int end = raw.start + NODE_SIZE;
 		
 		if (end - begin > 0) {
-			System.arraycopy(raw.raw, begin, raw.raw, begin + 2 * 8, end - begin);
+			System.arraycopy(raw.raw, begin, raw.raw, begin + 2 * 8, end - begin - 2 * 8);
 		}
 	}
 	
@@ -184,7 +184,7 @@ public class Node {
 			int k = 0;
 			
 			while (k < numKeys) {
-				if (k >= left) {
+				if (getRawKthKey(raw, k) >= left) {
 					break;
 				}
 				k++;
@@ -193,7 +193,7 @@ public class Node {
 			List<Long> uids = new ArrayList<>();
 			while (k < numKeys) {
 				long son = getRawKthSon(raw, k);
-				if (son <= right) {
+				if (getRawKthKey(raw, k) <= right) {
 					uids.add(son);
 					k++;
 				} else {

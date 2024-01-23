@@ -63,7 +63,7 @@ public class Entry {
 		dataItem.before();
 		try {
 			SubArray arr = dataItem.data();
-			System.arraycopy(Parser.long2Byte(xid), 0, arr.raw, arr.start + OF_DATA, 8);
+			System.arraycopy(Parser.long2Byte(xid), 0, arr.raw, arr.start + OF_XMAX, 8);
 		} finally {
 			dataItem.after(xid);
 		}

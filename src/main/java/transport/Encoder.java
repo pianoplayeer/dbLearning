@@ -37,7 +37,7 @@ public class Encoder {
 		if (data[0] == 0) {
 			return new Package(Arrays.copyOfRange(data, 1, data.length), null);
 		} else if (data[0] == 1) {
-			return new Package(null, new RuntimeException(Arrays.toString(Arrays.copyOfRange(data, 1, data.length))));
+			return new Package(null, new RuntimeException(new String(Arrays.copyOfRange(data, 1, data.length))));
 		} else {
 			throw Error.InvalidPkgDataException;
 		}

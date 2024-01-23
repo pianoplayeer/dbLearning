@@ -181,7 +181,7 @@ public class LoggerImpl implements Logger {
 		}
 		
 		int size = Parser.parseInt(tmp.array());
-		if (position + OF_DATA + size >= fileSize) {
+		if (position + OF_DATA + size > fileSize) {
 			return null;
 		}
 		

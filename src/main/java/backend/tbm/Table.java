@@ -198,11 +198,17 @@ public class Table {
 			}
 			
 			Map<String, Object> tmp = parseEntry(raw);
-			Map<String, Object> entry = new HashMap<>();
+			Map<String, Object> entry;
 			
-			for (String field : read.fields) {
-				entry.put(field, tmp.get(field));
+			if ("*".equals(read.fields[0])) {
+				entry = tmp;
+			} else {
+				entry = new HashMap<>();
+				for (String field : read.fields) {
+					entry.put(field, tmp.get(field));
+				}
 			}
+			
 			sb.append(printEntry(entry)).append("\n");
 		}
 		return sb.toString();
@@ -220,7 +226,7 @@ public class Table {
 	}
 	
 	private Map<String, Object> string2Entry(String[] values) throws Exception {
-		assert values.length != fields.size() : Error.InvalidValuesException;
+		assert values.length == fields.size() : Error.InvalidValuesException;
 		Map<String, Object> entry = new HashMap<>();
 		
 		for (int i = 0; i < fields.size(); i++) {
@@ -284,7 +290,12 @@ public class Table {
 		StringBuilder sb = new StringBuilder("[");
 		for (int i = 0; i < fields.size(); i++) {
 			Field field = fields.get(i);
-			sb.append(field.printValue(entry.get(field.fieldName)));
+			
+			Object v = entry.get(field.fieldName);
+			if (v == null) {
+				continue;
+			}
+			sb.append(field.printValue(v));
 			if(i == fields.size()-1) {
 				sb.append("]");
 			} else {
