@@ -36,7 +36,7 @@ public class Table {
 			Panic.panic(e);
 		}
 		
-		assert raw != null;
+		assert raw != null : Error.TableNotFoundException;
 		Table tb = new Table(tbm, uid);
 		return tb.parseSelf(raw);
 	}

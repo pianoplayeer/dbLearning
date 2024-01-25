@@ -59,7 +59,7 @@ public class VersionManagerImpl extends AbstractCache<Entry>
 		
 		assert t.err == null : t.err;
 		
-		Entry e = null;
+		Entry e;
 		try {
 			e = get(uid);
 		} catch (Exception ex) {

@@ -16,6 +16,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2024/1/16
  * @package backend.im
  */
+
+// TODO:加入对节点的删除部分，根据当前active事务中的最小xid来确定是否删除节点。
 public class BPlusTree {
 	DataManager dm;
 	long bootUid;

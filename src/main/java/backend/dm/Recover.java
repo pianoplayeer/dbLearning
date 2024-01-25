@@ -6,12 +6,10 @@ import backend.dm.logger.Logger;
 import backend.dm.page.Page;
 import backend.dm.page.PageX;
 import backend.dm.pageCache.PageCache;
-import backend.dm.pageCache.PageCacheImpl;
 import backend.tm.TransactionManager;
 import backend.utils.Panic;
 import backend.utils.Parser;
 import com.google.common.primitives.Bytes;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
 
@@ -57,7 +55,7 @@ public class Recover {
 		
 		logger.rewind();
 		int maxPageNo = 1;
-		byte[] log = null;
+		byte[] log;
 		
 		while ((log = logger.next()) != null) {
 			int pageNo;
@@ -217,7 +215,7 @@ public class Recover {
 		logInfo.xid = Parser.parseLong(Arrays.copyOfRange(log, OF_XID, OF_UPDATE_UID));
 		long uid = Parser.parseLong(Arrays.copyOfRange(log, OF_UPDATE_UID, OF_UPDATE_RAW));
 		logInfo.offset = (short) (uid & ((1 << 16) - 1));
-		logInfo.pageNo = (int) ((uid >>> 32) & ((1 << 32) - 1));
+		logInfo.pageNo = (int) ((uid >>> 32) & ((1L << 32) - 1));
 		
 		int len = (log.length - OF_UPDATE_RAW) / 2;
 		logInfo.oldRaw = Arrays.copyOfRange(log, OF_UPDATE_RAW, OF_UPDATE_RAW + len);
@@ -239,7 +237,6 @@ public class Recover {
 		
 		Page page = null;
 		try {
-			//TODO:解决pageNo为0的bug
 			page = pc.getPage(pageNo);
 		} catch (Exception e) {
 			Panic.panic(e);
