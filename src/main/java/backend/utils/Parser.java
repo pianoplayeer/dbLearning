@@ -1,9 +1,7 @@
 package backend.utils;
 
 import com.google.common.primitives.Bytes;
-
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 /**

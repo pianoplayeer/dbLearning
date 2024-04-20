@@ -157,4 +157,6 @@ public class DataManagerImpl extends AbstractCache<DataItem> implements DataMana
 		
 		return PageOne.checkVc(pageOne);
 	}
+	
 }
+

@@ -85,14 +85,14 @@ public class TableManagerImpl implements TableManager {
 				builder.append(tb.toString()).append("\n");
 			}
 			
-			List<Table> list = xidTableCache.get(xid);
-			if (list == null) {
-				return "\n".getBytes();
-			}
-			
-			for (Table tb : list) {
-				builder.append(tb.toString()).append("\n");
-			}
+//			List<Table> list = xidTableCache.get(xid);
+//			if (list == null) {
+//				return "\n".getBytes();
+//			}
+//
+//			for (Table tb : list) {
+//				builder.append(tb.toString()).append("\n");
+//			}
 			
 			return builder.toString().getBytes();
 		} finally {

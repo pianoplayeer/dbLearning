@@ -55,8 +55,8 @@ public class Visibility {
 				return true;
 			}
 			
-			if (xmax != xid ) {
-				return !tm.isCommitted(xmax) && xmax > xid && t.isInSnapShot(xmax);
+			if (xmax != xid) {
+				return !tm.isCommitted(xmax) || xmax > xid || t.isInSnapShot(xmax);
 			}
 		}
 		

@@ -2,6 +2,8 @@ package transport;
 
 import com.google.common.primitives.Bytes;
 import common.Error;
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 
 import java.util.Arrays;
 
@@ -41,5 +43,13 @@ public class Encoder {
 		} else {
 			throw Error.InvalidPkgDataException;
 		}
+	}
+	
+	public static String hexEncode(byte[] buf) {
+		return Hex.encodeHexString(buf, true) + "\n";
+	}
+	
+	public static byte[] hexDecode(String buf) throws DecoderException {
+		return Hex.decodeHex(buf);
 	}
 }

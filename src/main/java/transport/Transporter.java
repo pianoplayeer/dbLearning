@@ -22,7 +22,7 @@ public class Transporter {
 	}
 	
 	public void send(byte[] data) throws Exception {
-		String raw = hexEncode(data);
+		String raw = Encoder.hexEncode(data);
 		writer.write(raw);
 		writer.flush();
 	}
@@ -32,7 +32,7 @@ public class Transporter {
 		if (line == null) {
 			close();
 		}
-		return hexDecode(line);
+		return Encoder.hexDecode(line);
 	}
 	
 	public void close() throws IOException {
@@ -41,11 +41,5 @@ public class Transporter {
 		socket.close();
 	}
 	
-	private String hexEncode(byte[] buf) {
-		return Hex.encodeHexString(buf, true) + "\n";
-	}
 	
-	private byte[] hexDecode(String buf) throws DecoderException {
-		return Hex.decodeHex(buf);
-	}
 }
